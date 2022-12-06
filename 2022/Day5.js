@@ -30,34 +30,20 @@ const parseStacksFromString = () => {
   return stacksMap;
 }
 
-let stacksMap = parseStacksFromString();
+const moveCratesAndGetAnswer = (isCrateMover9001) => {
+  const stacksMap = parseStacksFromString();
 
-for (const step of inputs) {
-  const [, move, from, to] = step.match(/move (\d*) from (\d*) to (\d*)/);
-  const crates = stacksMap.get(from);
-  const crateToMove = crates.splice(crates.length - parseInt(move), parseInt(move)).reverse();
-  stacksMap.get(to).push(...crateToMove);
+  for (const step of inputs) {
+    const [, move, from, to] = step.match(/move (\d*) from (\d*) to (\d*)/);
+    const crates = stacksMap.get(from);
+    let crateToMove = crates.splice(crates.length - parseInt(move), parseInt(move));
+    if (!isCrateMover9001) {
+      crateToMove = crateToMove.reverse();
+    }
+    stacksMap.get(to).push(...crateToMove);
+  }
+  return [...stacksMap.values()].map(crates => crates[crates.length - 1]).join('');
 }
 
-let answer = '';
-for (const crates of stacksMap.values()) {
-  answer += crates[crates.length - 1];
-}
-
-console.log('Answer Day 5, Part 1: ', answer);
-
-stacksMap = parseStacksFromString();
-
-for (const step of inputs) {
-  const [, move, from, to] = step.match(/move (\d*) from (\d*) to (\d*)/);
-  const crates = stacksMap.get(from);
-  const crateToMove = crates.splice(crates.length - parseInt(move), parseInt(move));
-  stacksMap.get(to).push(...crateToMove);
-}
-
-answer = '';
-for (const crates of stacksMap.values()) {
-  answer += crates[crates.length - 1];
-}
-
-console.log('Answer Day 5, Part 2: ', answer);
+console.log('Answer Day 5, Part 1: ', moveCratesAndGetAnswer());
+console.log('Answer Day 5, Part 2: ', moveCratesAndGetAnswer(true));
