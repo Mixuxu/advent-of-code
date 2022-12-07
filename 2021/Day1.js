@@ -1,6 +1,5 @@
 const fs = require('fs');
-const path = require('path');
-const buffer = fs.readFileSync(path.resolve(__dirname, './inputs/Day1.txt'));
+const buffer = fs.readFileSync('./2021/inputs/Day1.txt');
 const inputs = buffer.toString().split('\n').map((input) => parseInt(input));
 
 let i = 0;

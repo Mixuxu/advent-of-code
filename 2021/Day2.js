@@ -1,5 +1,5 @@
 const fs = require('fs');
-const buffer = fs.readFileSync('./inputs/Day2.txt');
+const buffer = fs.readFileSync('./2021/inputs/Day2.txt');
 const inputs = buffer.toString().split('\n');
 
 let x = 0;

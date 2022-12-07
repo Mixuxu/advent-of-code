@@ -1,6 +1,5 @@
 const fs = require('fs');
-const path = require('path');
-const buffer = fs.readFileSync(path.resolve(__dirname, './inputs/Day3.txt'));
+const buffer = fs.readFileSync('./2022/inputs/Day3.txt');
 const inputs = buffer.toString().split('\n');
 
 const getItemScore = (item) => {

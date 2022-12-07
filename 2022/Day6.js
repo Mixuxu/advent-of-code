@@ -1,6 +1,5 @@
 const fs = require('fs');
-const path = require('path');
-const buffer = fs.readFileSync(path.resolve(__dirname, './inputs/Day6.txt'));
+const buffer = fs.readFileSync('./2022/inputs/Day6.txt');
 const input = buffer.toString();
 
 const findMarker = (n) => {

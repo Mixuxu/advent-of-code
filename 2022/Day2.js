@@ -1,6 +1,5 @@
 const fs = require('fs');
-const path = require('path');
-const buffer = fs.readFileSync(path.resolve(__dirname, './inputs/Day2.txt'));
+const buffer = fs.readFileSync('./2022/inputs/Day2.txt');
 const inputs = buffer.toString().split('\n');
 
 const HAND_SCORE = {
