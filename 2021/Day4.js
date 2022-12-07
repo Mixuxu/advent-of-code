@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs'
 const buffer = fs.readFileSync('./2021/inputs/Day4.txt');
 const inputs = buffer.toString().split('\n');
 const draws = inputs.shift().split(',').map((i) => parseInt(i));

@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs'
 const buffer = fs.readFileSync('./2022/inputs/Day6.txt');
 const input = buffer.toString();
 

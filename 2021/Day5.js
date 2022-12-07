@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs'
 const buffer = fs.readFileSync('./2021/inputs/Day5.txt');
 const inputs = buffer.toString().split('\n');
 
