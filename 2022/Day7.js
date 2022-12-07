@@ -38,14 +38,11 @@ for (const input of inputs) {
         const directory = getCurrentDirectory();
         if (!directory) {
           directoryTree[path] = { parent: undefined, children: {}, size: 0 };
-
         } else {
           directory.children[path] = { parent: directory, children: {}, size: 0 };
         }
         currentPath.push(path);
       }
-    } else if (command === 'ls') {
-      // ok?
     }
   } else {
     const [, size, _fileName] = input.match(/(\d*|dir) ([\w.]*)/);
@@ -75,8 +72,8 @@ console.log('Answer Day 7, Part 1: ', total);
 
 const rootSize = directoryTree['/'].size;
 const spaceToCreate = SPACE_NEEDED - (TOTAL_DISK_SPACE - rootSize);
-let currentSmallestDirectoryToDelete = 0;
 
+let currentSmallestDirectoryToDelete = 0;
 const getTheThing = (directory) => {
   const dirs = Object.keys(directory);
   for (const dirName of dirs) {
