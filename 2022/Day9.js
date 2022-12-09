@@ -1,6 +1,5 @@
 import fs from 'fs'
-const buffer = fs.readFileSync('./2022/inputs/Day9.txt');
-const inputs = buffer.toString().split('\n');
+const inputs = fs.readFileSync('./2022/inputs/Day9.txt').toString().split('\n');
 
 function moveRope(ropeLength) {
   const rope = Array.from({ length: ropeLength }, () => {
@@ -28,30 +27,14 @@ function moveRope(ropeLength) {
         const ropePart = rope[j];
         const ropePartInFront = rope[j - 1];
 
-        if ((ropePartInFront.x < (ropePart.x - 1) || ropePartInFront.x > (ropePart.x + 1)) || (ropePartInFront.y < (ropePart.y - 1) || ropePartInFront.y > (ropePart.y + 1))) {
+        if (_shouldMoveRopePart(ropePart, ropePartInFront)) {
           if (ropePartInFront.x === ropePart.x) {
-            if (ropePartInFront.y > ropePart.y) {
-              ropePart.y++;
-            } else {
-              ropePart.y--;
-            }
+            _moveRope(ropePart, ropePartInFront, 'y');
           } else if (ropePartInFront.y === ropePart.y) {
-            if (ropePartInFront.x > ropePart.x) {
-              ropePart.x++;
-            } else {
-              ropePart.x--;
-            }
+            _moveRope(ropePart, ropePartInFront, 'x');
           } else {
-            if (ropePartInFront.y > ropePart.y) {
-              ropePart.y++;
-            } else {
-              ropePart.y--;
-            }
-            if (ropePartInFront.x > ropePart.x) {
-              ropePart.x++;
-            } else {
-              ropePart.x--;
-            }
+            _moveRope(ropePart, ropePartInFront, 'y');
+            _moveRope(ropePart, ropePartInFront, 'x');
           }
         }
       }
@@ -60,6 +43,19 @@ function moveRope(ropeLength) {
     }
   }
   return tailPositions.size;
+}
+
+function _shouldMoveRopePart(ropePart, ropePartInFront) {
+  return (ropePartInFront.x < (ropePart.x - 1) || ropePartInFront.x > (ropePart.x + 1)) ||
+         (ropePartInFront.y < (ropePart.y - 1) || ropePartInFront.y > (ropePart.y + 1));
+}
+
+function _moveRope(ropePart, ropePartInFront, axis) {
+  if (ropePartInFront[axis] > ropePart[axis]) {
+    ropePart[axis]++;
+  } else {
+    ropePart[axis]--;
+  }
 }
 
 console.log('Answer Day 9, Part 1: ', moveRope(2));
