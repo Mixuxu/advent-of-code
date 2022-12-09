@@ -29,12 +29,12 @@ function moveRope(ropeLength) {
 
         if (_shouldMoveRopePart(ropePart, ropePartInFront)) {
           if (ropePartInFront.x === ropePart.x) {
-            _moveRope(ropePart, ropePartInFront, 'y');
+            _moveRopePart(ropePart, ropePartInFront, 'y');
           } else if (ropePartInFront.y === ropePart.y) {
-            _moveRope(ropePart, ropePartInFront, 'x');
+            _moveRopePart(ropePart, ropePartInFront, 'x');
           } else {
-            _moveRope(ropePart, ropePartInFront, 'y');
-            _moveRope(ropePart, ropePartInFront, 'x');
+            _moveRopePart(ropePart, ropePartInFront, 'y');
+            _moveRopePart(ropePart, ropePartInFront, 'x');
           }
         }
       }
@@ -50,7 +50,7 @@ function _shouldMoveRopePart(ropePart, ropePartInFront) {
          (ropePartInFront.y < (ropePart.y - 1) || ropePartInFront.y > (ropePart.y + 1));
 }
 
-function _moveRope(ropePart, ropePartInFront, axis) {
+function _moveRopePart(ropePart, ropePartInFront, axis) {
   if (ropePartInFront[axis] > ropePart[axis]) {
     ropePart[axis]++;
   } else {
