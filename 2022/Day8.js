@@ -2,32 +2,32 @@ import fs from 'fs'
 const buffer = fs.readFileSync('./2022/inputs/Day8.txt');
 const inputs = buffer.toString().split('\n');
 
-const treeMatrix = new Map();
+const trees = new Map();
 
 let y = 0;
 for (const treeRow of inputs) {
   let x = 0;
   for (const tree of treeRow.split('').map(tree => parseInt(tree))) {
-    treeMatrix.set(`${x}_${y}`, tree);
+    trees.set(`${x}_${y}`, tree);
     x++;
   }
   y++;
 }
 
 let visibleTrees = 0;
-for (const [matrix, height] of treeMatrix.entries()) {
-  if (isVisible(matrix, height)) {
+for (const [position, height] of trees.entries()) {
+  if (isVisible(position, height)) {
     visibleTrees++;
   }
 }
 
-function isVisible(matrix, height) {
-  const [x, y] = matrix.split('_').map(v => parseInt(v));
+function isVisible(position, height) {
+  const [x, y] = position.split('_').map(v => parseInt(v));
 
   // Left
   let isVisible = true;
   for (let i = (x - 1); i >= 0; i--) {
-    if (treeMatrix.get(`${i}_${y}`) >= height) {
+    if (trees.get(`${i}_${y}`) >= height) {
       isVisible = false;
       break;
     }
@@ -40,7 +40,7 @@ function isVisible(matrix, height) {
   // Top
   isVisible = true;
   for (let i = (y - 1); i >= 0; i--) {
-    if (treeMatrix.get(`${x}_${i}`) >= height) {
+    if (trees.get(`${x}_${i}`) >= height) {
       isVisible = false;
       break;
     }
@@ -53,7 +53,7 @@ function isVisible(matrix, height) {
   // Right
   isVisible = true;
   for (let i = (x + 1); i <= 99; i++) {
-    if (treeMatrix.get(`${i}_${y}`) >= height) {
+    if (trees.get(`${i}_${y}`) >= height) {
       isVisible = false;
       break;
     }
@@ -66,7 +66,7 @@ function isVisible(matrix, height) {
   // Bottom
   isVisible = true;
   for (let i = (y + 1); i <= 99; i++) {
-    if (treeMatrix.get(`${x}_${i}`) >= height) {
+    if (trees.get(`${x}_${i}`) >= height) {
       isVisible = false;
       break;
     }
@@ -77,20 +77,20 @@ function isVisible(matrix, height) {
 console.log('Answer Day 8, Part 1: ', visibleTrees);
 
 let highestScenicScore = 0;
-for (const [matrix, tree] of treeMatrix.entries()) {
-  const scenicScore = getScenicScore(matrix, tree);
+for (const [position, tree] of trees.entries()) {
+  const scenicScore = getScenicScore(position, tree);
   if (scenicScore > highestScenicScore) {
     highestScenicScore = scenicScore;
   }
 }
 
-function getScenicScore(matrix, tree) {
-  const [x, y] = matrix.split('_').map(v => parseInt(v));
+function getScenicScore(position, tree) {
+  const [x, y] = position.split('_').map(v => parseInt(v));
 
   // Left
   let treesVisibleToTheLeft = 0;
   for (let i = (x - 1); i >= 0; i--) {
-    const currentTree = treeMatrix.get(`${i}_${y}`);
+    const currentTree = trees.get(`${i}_${y}`);
     if (currentTree === undefined) {
       break;
     }
@@ -103,7 +103,7 @@ function getScenicScore(matrix, tree) {
   // Top
   let treesVisibleToTheTop = 0;
   for (let i = (y - 1); i >= 0; i--) {
-    const currentTree = treeMatrix.get(`${x}_${i}`);
+    const currentTree = trees.get(`${x}_${i}`);
     if (currentTree === undefined) {
       break;
     }
@@ -116,7 +116,7 @@ function getScenicScore(matrix, tree) {
   // Right
   let treesVisibleToTheRight = 0;
   for (let i = (x + 1); i <= 99; i++) {
-    const currentTree = treeMatrix.get(`${i}_${y}`);
+    const currentTree = trees.get(`${i}_${y}`);
     if (currentTree === undefined) {
       break;
     }
@@ -129,7 +129,7 @@ function getScenicScore(matrix, tree) {
   // Bottom
   let treesVisibleToTheBottom = 0;
   for (let i = (y + 1); i <= 99; i++) {
-    const currentTree = treeMatrix.get(`${x}_${i}`);
+    const currentTree = trees.get(`${x}_${i}`);
     if (currentTree === undefined) {
       break;
     }
