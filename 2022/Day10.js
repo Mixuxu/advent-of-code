@@ -27,14 +27,13 @@ for (const input of inputs) {
   }
 }
 
-console.log('Answer Day 9, Part 1: ', signalStrengths.reduce((sum, x) => sum + x));
+console.log('Answer Day 10, Part 1: ', signalStrengths.reduce((sum, x) => sum + x));
 
 const renderingCycles = [40, 80, 120, 160, 200, 240];
 let render = '';
 let renderer = 0;
 x = 1;
 cycle = 0;
-
 
 function drawPixel() {
   if ([x-1, x, x+1].includes(renderer)) {
@@ -57,7 +56,7 @@ for (const input of inputs) {
     drawPixel();
     renderer++;
     if (renderingCycles.includes(cycle)) {
-      console.log('Answer Day 9, Part 2:', render);
+      console.log('Answer Day 10, Part 2:', render);
       render = '';
       renderer = 0;
     }
@@ -66,7 +65,7 @@ for (const input of inputs) {
     renderer++;
   }
   if (renderingCycles.includes(cycle)) {
-    console.log('Answer Day 9, Part 2:', render);
+    console.log('Answer Day 10, Part 2:', render);
     render = '';
     renderer = 0;
   }
@@ -77,10 +76,10 @@ for (const input of inputs) {
 }
 
 /*
-  Answer Day 9, Part 2: ####.###..#..#.###..#..#.####..##..#..#.
-  Answer Day 9, Part 2: #....#..#.#..#.#..#.#..#....#.#..#.#..#.
-  Answer Day 9, Part 2: ###..###..#..#.#..#.####...#..#....####.
-  Answer Day 9, Part 2: #....#..#.#..#.###..#..#..#...#....#..#.
-  Answer Day 9, Part 2: #....#..#.#..#.#.#..#..#.#....#..#.#..#.
-  Answer Day 9, Part 2: #....###...##..#..#.#..#.####..##..#..#.
+  Answer Day 10, Part 2: ####.###..#..#.###..#..#.####..##..#..#.
+  Answer Day 10, Part 2: #....#..#.#..#.#..#.#..#....#.#..#.#..#.
+  Answer Day 10, Part 2: ###..###..#..#.#..#.####...#..#....####.
+  Answer Day 10, Part 2: #....#..#.#..#.###..#..#..#...#....#..#.
+  Answer Day 10, Part 2: #....#..#.#..#.#.#..#..#.#....#..#.#..#.
+  Answer Day 10, Part 2: #....###...##..#..#.#..#.####..##..#..#.
 */
