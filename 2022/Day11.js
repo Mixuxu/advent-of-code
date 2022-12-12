@@ -25,26 +25,26 @@ function parseMonkeys() {
   return monkeys;
 }
 
-
-function monkeyBusiness(megaWorry) {
+function monkeyBusiness(part2) {
   let monkeys = parseMonkeys();
-  const rounds = megaWorry ? 10000 : 20;
-  const divider = megaWorry ? 1 : 3;
+  const rounds = part2 ? 10000 : 20;
+  const divider = part2 ? _getMonkeyModulo(monkeys) : 3;
+  const operator = part2 ? '%' : '/';
 
   for (let i = 0; i < rounds; i++) {
     for (const monkey of monkeys) {
       while(monkey.items.length) {
         monkey.itemsInspected++;
         const item = monkey.items.shift();
-        const worryLevel = Math.floor(eval(`(${monkey.operation.replaceAll('old', item)}) / ${divider}`));
+        const worryLevel = Math.floor(eval(`(${monkey.operation.replaceAll('old', item)}) ${operator} ${divider}`));
 
-        if (!(worryLevel % monkey.divisibleBy)) {
-          const targetMonkey = monkeys.find(m => m.monkeyId === monkey.ifTrueMonkeyId);
-          targetMonkey.items.push(worryLevel);
+        let targetMonkey;
+        if (worryLevel % monkey.divisibleBy === 0) {
+          targetMonkey = monkeys.find(m => m.monkeyId === monkey.ifTrueMonkeyId);
         } else {
-          const targetMonkey = monkeys.find(m => m.monkeyId === monkey.ifFalseMonkeyId);
-          targetMonkey.items.push(worryLevel);
+          targetMonkey = monkeys.find(m => m.monkeyId === monkey.ifFalseMonkeyId);
         }
+        targetMonkey.items.push(worryLevel);
       }
     }
   }
@@ -52,6 +52,13 @@ function monkeyBusiness(megaWorry) {
   return monkeys[0].itemsInspected * monkeys[1].itemsInspected;
 }
 
+function _getMonkeyModulo(monkeys) {
+  let modulo = 1;
+  for (const monkey of monkeys) {
+    modulo *= monkey.divisibleBy;
+  }
+  return modulo;
+}
+
 console.log('Answer Day 11, Part 1: ', monkeyBusiness());
 console.log('Answer Day 11, Part 2: ', monkeyBusiness(true));
-
