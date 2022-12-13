@@ -86,11 +86,11 @@ function getPointNeighbors(point, points, reverse) {
   for (const possibleNeighbor of possibleNeighbors) {
     const neighborElevation = points[possibleNeighbor];
     if (reverse) {
-      if (neighborElevation && neighborElevation >= pointElevation - 1) {
+      if (neighborElevation >= pointElevation - 1) {
         traversableNeighbors.push(possibleNeighbor);
       }
     } else {
-      if (neighborElevation && neighborElevation <= pointElevation + 1) {
+      if (neighborElevation <= pointElevation + 1) {
         traversableNeighbors.push(possibleNeighbor);
       }
     }
