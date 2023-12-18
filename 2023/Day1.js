@@ -14,21 +14,21 @@ for (const input of inputs) {
 console.log('Answer Day 1, Part 1: ', sum);
 
 const stringToNumberMap = {
-  'one': 'o1e',
-  'two': 't2o',
-  'three': 't3e',
-  'four': 'f4r',
-  'five' : 'f5e',
-  'six': 's6x',
-  'seven': 's7n',
-  'eight': 'e8t',
-  'nine': 'n9e',
+  'one': '1',
+  'two': '2',
+  'three': '3',
+  'four': '4',
+  'five' : '5',
+  'six': '6',
+  'seven': '7',
+  'eight': '8',
+  'nine': '9',
 };
 sum = 0;
 
 for (let input of inputs) {
   for (const [key, value] of Object.entries(stringToNumberMap)) {
-    input = input.replace(new RegExp(key, 'g'), value);
+    input = input.replace(new RegExp(key, 'g'), `${key}${value}${key}`);
   }
   const match = input.match(/\d/g);
   const firstNumber = match[0];
