@@ -14,7 +14,7 @@ for (const input of inputs) {
 console.log('Answer Day 1, Part 1: ', sum);
 
 const stringToNumberMap = {
-  'one': 'n1e',
+  'one': 'o1e',
   'two': 't2o',
   'three': 't3e',
   'four': 'f4r',
